@@ -1,7 +1,9 @@
-from PyQt5.QtGui import QPixmap
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtWidgets import QApplication, QMessageBox, QFileDialog, QMainWindow
 from ui import Ui_Form
 import os
+import cv2
 
 
 # 游览时会遇到五种情况：
@@ -17,89 +19,6 @@ import os
 # 上上一张图的路径：self.path_pic_previous2
 # 下一张图的路径：self.path_pic_next1
 # 下下一张图的路径：self.path_pic_next2
-
-def situation_1(self):
-    # 这种情况只需要四张图片的路径，主图路径在主函数合成，其他三张图的路径在本函数进行合成
-    self.path_pic_previous2 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main - 2]
-    self.path_pic_previous1 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main - 1]
-    self.path_pic_next1 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main + 1]
-
-    self.ui.label_51.setPixmap(QPixmap(self.path_pic_previous2))  # 给label传入图片
-    self.ui.label_56.setText(self.names_all_pics[self.index_main - 2])  # 给label传入图片的文件名
-    self.ui.label_52.setPixmap(QPixmap(self.path_pic_previous1))
-    self.ui.label_57.setText(self.names_all_pics[self.index_main - 1])
-    self.ui.label_53.setPixmap(QPixmap(self.path_pic_main))
-    self.ui.label_58.setText(self.names_all_pics[self.index_main])
-    self.ui.label_54.setPixmap(QPixmap(self.path_pic_next1))
-    self.ui.label_59.setText(self.names_all_pics[self.index_main + 1])
-    self.ui.label_55.setPixmap(QPixmap(""))  # 给lab传入空图片
-    self.ui.label_60.setText("")  # 给lab传入空字符
-    # 以下函数同理
-
-
-def situation_2(self):
-    self.path_pic_previous2 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main - 2]
-    self.path_pic_previous1 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main - 1]
-    self.ui.label_51.setPixmap(QPixmap(self.path_pic_previous2))
-    self.ui.label_56.setText(self.names_all_pics[self.index_main - 2])
-    self.ui.label_52.setPixmap(QPixmap(self.path_pic_previous1))
-    self.ui.label_57.setText(self.names_all_pics[self.index_main - 1])
-    self.ui.label_53.setPixmap(QPixmap(self.path_pic_main))
-    self.ui.label_58.setText(self.names_all_pics[self.index_main])
-    self.ui.label_54.setPixmap(QPixmap(""))
-    self.ui.label_59.setText("")
-    self.ui.label_55.setPixmap(QPixmap(""))
-    self.ui.label_60.setText("")
-    self.ui.button_53.setDisabled(True)  # 游览到最后一张时时禁用下一张按钮
-
-
-def situation_3(self):
-    self.path_pic_next1 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main + 1]
-    self.path_pic_next2 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main + 2]
-    self.ui.label_51.setPixmap(QPixmap(""))
-    self.ui.label_56.setText("")
-    self.ui.label_52.setPixmap(QPixmap(""))
-    self.ui.label_57.setText("")
-    self.ui.label_53.setPixmap(QPixmap(self.path_pic_main))
-    self.ui.label_58.setText(self.names_all_pics[self.index_main])
-    self.ui.label_54.setPixmap(QPixmap(self.path_pic_next1))
-    self.ui.label_59.setText(self.names_all_pics[self.index_main + 1])
-    self.ui.label_55.setPixmap(QPixmap(self.path_pic_next2))
-    self.ui.label_60.setText(self.names_all_pics[self.index_main + 2])
-    self.ui.button_51.setDisabled(True)  # 游览到第一张时时禁用上一张按钮
-
-
-def situation_4(self):
-    self.path_pic_previous1 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main - 1]
-    self.path_pic_next1 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main + 1]
-    self.path_pic_next2 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main + 2]
-    self.ui.label_51.setPixmap(QPixmap(""))
-    self.ui.label_56.setText("")
-    self.ui.label_52.setPixmap(QPixmap(self.path_pic_previous1))
-    self.ui.label_57.setText(self.names_all_pics[self.index_main - 1])
-    self.ui.label_53.setPixmap(QPixmap(self.path_pic_main))
-    self.ui.label_58.setText(self.names_all_pics[self.index_main])
-    self.ui.label_54.setPixmap(QPixmap(self.path_pic_next1))
-    self.ui.label_59.setText(self.names_all_pics[self.index_main + 1])
-    self.ui.label_55.setPixmap(QPixmap(self.path_pic_next2))
-    self.ui.label_60.setText(self.names_all_pics[self.index_main + 2])
-
-
-def situation_normal(self):
-    self.path_pic_previous2 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main - 2]
-    self.path_pic_previous1 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main - 1]
-    self.path_pic_next1 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main + 1]
-    self.path_pic_next2 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main + 2]
-    self.ui.label_51.setPixmap(QPixmap(self.path_pic_previous2))
-    self.ui.label_56.setText(self.names_all_pics[self.index_main - 2])
-    self.ui.label_52.setPixmap(QPixmap(self.path_pic_previous1))
-    self.ui.label_57.setText(self.names_all_pics[self.index_main - 1])
-    self.ui.label_53.setPixmap(QPixmap(self.path_pic_main))
-    self.ui.label_58.setText(self.names_all_pics[self.index_main])
-    self.ui.label_54.setPixmap(QPixmap(self.path_pic_next1))
-    self.ui.label_59.setText(self.names_all_pics[self.index_main + 1])
-    self.ui.label_55.setPixmap(QPixmap(self.path_pic_next2))
-    self.ui.label_60.setText(self.names_all_pics[self.index_main + 2])
 
 
 class Select(QMainWindow):
@@ -129,15 +48,15 @@ class Select(QMainWindow):
             self.names_all_pics = os.listdir(self.path_of_pic_folder)  # 获取图片所在文件夹中所有文件的文件名
             self.index_main = self.names_all_pics.index(self.name_of_main_pic)  # 获取主图的索引
             if self.index_main == len(self.names_all_pics) - 2:  # 选择的图片是倒数第二张
-                situation_1(self)
+                self.situation_1()
             elif self.index_main == len(self.names_all_pics) - 1:  # 选择的图片是倒数第一张
-                situation_2(self)
+                self.situation_2()
             elif self.index_main == 0:  # 选择的图片是正数第一张
-                situation_3(self)
+                self.situation_3()
             elif self.index_main == 1:  # 选择的图片是正数第二张
-                situation_4(self)
+                self.situation_4()
             else:
-                situation_normal(self)  # 正常情况
+                self.situation_normal()  # 正常情况
 
         return None
 
@@ -149,14 +68,14 @@ class Select(QMainWindow):
             self.index_main = self.index_main + 1  # 将主图的索引加一
             self.path_pic_main = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main]  # 合成主图路径
             if self.index_main == len(self.names_all_pics) - 2:  # 下一张的图片是倒数第二张
-                situation_1(self)
+                self.situation_1()
             elif self.index_main == len(self.names_all_pics) - 1:  # 下一张的图片是倒数第一张
-                situation_2(self)
+                self.situation_2()
                 QMessageBox.about(self, '警告', '这已经是最后一张照片了！')
             elif self.index_main == 1:  # 下一张的图片是正数第二张
-                situation_4(self)
+                self.situation_4()
             else:  # 正常情况
-                situation_normal(self)
+                self.situation_normal()
         else:
             QMessageBox.about(self, '警告', '未指定图片')
             return None
@@ -168,17 +87,149 @@ class Select(QMainWindow):
             self.index_main = self.index_main - 1  # 将主图的索引减一
             self.path_pic_main = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main]  # 合成主图路径
             if self.index_main == len(self.names_all_pics) - 2:  # 下一张的图片是倒数第二张
-                situation_1(self)
+                self.situation_1()
             elif self.index_main == 1:  # 下一张的图片是正数第二张
-                situation_4(self)
+                self.situation_4()
             elif self.index_main == 0:  # 下一张的图片是正数第一张
-                situation_3(self)
+                self.situation_3()
                 QMessageBox.about(self, '警告', '这已经是第一张照片了！')
             else:  # 正常情况
-                situation_normal(self)
+                self.situation_normal()
         else:
             QMessageBox.about(self, '警告', '未指定图片')
             return None
+
+    def situation_1(self):
+        # 这种情况只需要四张图片的路径，主图路径在主函数合成，其他三张图的路径在本函数进行合成
+        self.path_pic_previous2 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main - 2]
+        self.path_pic_previous1 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main - 1]
+        self.path_pic_next1 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main + 1]
+        self.pic_previous2 = self.fill(self.path_pic_previous2, self.ui.label_51.width() / self.ui.label_51.height())
+        self.ui.label_51.setPixmap(QPixmap(self.pic_previous2))
+        self.ui.label_56.setText(self.names_all_pics[self.index_main - 2])
+
+        self.pic_previous1 = self.fill(self.path_pic_previous1, self.ui.label_52.width() / self.ui.label_52.height())
+        self.ui.label_52.setPixmap(QPixmap(self.pic_previous1))
+        self.ui.label_57.setText(self.names_all_pics[self.index_main - 1])
+
+        self.pic_main = self.fill(self.path_pic_main, self.ui.label_53.width() / self.ui.label_53.height())
+        self.ui.label_53.setPixmap(QPixmap.fromImage(self.pic_main))
+        self.ui.label_58.setText(self.names_all_pics[self.index_main])
+
+        self.pic_next1 = self.fill(self.path_pic_next1, self.ui.label_54.width() / self.ui.label_54.height())
+        self.ui.label_54.setPixmap(QPixmap(self.pic_next1))
+        self.ui.label_59.setText(self.names_all_pics[self.index_main + 1])
+        self.ui.label_55.setPixmap(QPixmap(""))  # 给lab传入空图片
+        self.ui.label_60.setText("")  # 给lab传入空字符
+        # 以下函数同理
+
+    def situation_2(self):
+        self.path_pic_previous2 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main - 2]
+        self.path_pic_previous1 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main - 1]
+        self.pic_previous2 = self.fill(self.path_pic_previous2, self.ui.label_51.width() / self.ui.label_51.height())
+        self.ui.label_51.setPixmap(QPixmap(self.pic_previous2))
+        self.ui.label_56.setText(self.names_all_pics[self.index_main - 2])
+        self.pic_previous1 = self.fill(self.path_pic_previous1, self.ui.label_52.width() / self.ui.label_52.height())
+        self.ui.label_52.setPixmap(QPixmap(self.pic_previous1))
+        self.ui.label_57.setText(self.names_all_pics[self.index_main - 1])
+        self.pic_main = self.fill(self.path_pic_main, self.ui.label_53.width() / self.ui.label_53.height())
+        self.ui.label_53.setPixmap(QPixmap.fromImage(self.pic_main))
+        self.ui.label_58.setText(self.names_all_pics[self.index_main])
+        self.ui.label_54.setPixmap(QPixmap(""))
+        self.ui.label_59.setText("")
+        self.ui.label_55.setPixmap(QPixmap(""))
+        self.ui.label_60.setText("")
+        self.ui.button_53.setDisabled(True)  # 游览到最后一张时时禁用下一张按钮
+
+    def situation_3(self):
+        self.path_pic_next1 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main + 1]
+        self.path_pic_next2 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main + 2]
+        self.ui.label_51.setPixmap(QPixmap(""))
+        self.ui.label_56.setText("")
+        self.ui.label_52.setPixmap(QPixmap(""))
+        self.ui.label_57.setText("")
+        self.pic_main = self.fill(self.path_pic_main, self.ui.label_53.width() / self.ui.label_53.height())
+        self.ui.label_53.setPixmap(QPixmap.fromImage(self.pic_main))
+        self.ui.label_58.setText(self.names_all_pics[self.index_main])
+        self.pic_next1 = self.fill(self.path_pic_next1, self.ui.label_54.width() / self.ui.label_54.height())
+        self.ui.label_54.setPixmap(QPixmap(self.pic_next1))
+        self.ui.label_59.setText(self.names_all_pics[self.index_main + 1])
+        self.pic_next2 = self.fill(self.path_pic_next2, self.ui.label_55.width() / self.ui.label_55.height())
+        self.ui.label_55.setPixmap(QPixmap(self.pic_next2))
+        self.ui.label_60.setText(self.names_all_pics[self.index_main + 2])
+        self.ui.button_51.setDisabled(True)  # 游览到第一张时时禁用上一张按钮
+
+    def situation_4(self):
+        self.path_pic_previous1 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main - 1]
+        self.path_pic_next1 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main + 1]
+        self.path_pic_next2 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main + 2]
+        self.ui.label_51.setPixmap(QPixmap(""))
+        self.ui.label_56.setText("")
+
+        self.pic_previous1 = self.fill(self.path_pic_previous1, self.ui.label_52.width() / self.ui.label_52.height())
+        self.ui.label_52.setPixmap(QPixmap(self.pic_previous1))
+        self.ui.label_57.setText(self.names_all_pics[self.index_main - 1])
+
+        self.pic_main = self.fill(self.path_pic_main, self.ui.label_53.width() / self.ui.label_53.height())
+        self.ui.label_53.setPixmap(QPixmap.fromImage(self.pic_main))
+        self.ui.label_58.setText(self.names_all_pics[self.index_main])
+
+        self.pic_next1 = self.fill(self.path_pic_next1, self.ui.label_54.width() / self.ui.label_54.height())
+        self.ui.label_54.setPixmap(QPixmap(self.pic_next1))
+        self.ui.label_59.setText(self.names_all_pics[self.index_main + 1])
+
+        self.pic_next2 = self.fill(self.path_pic_next2, self.ui.label_55.width() / self.ui.label_55.height())
+        self.ui.label_55.setPixmap(QPixmap(self.pic_next2))
+        self.ui.label_60.setText(self.names_all_pics[self.index_main + 2])
+
+    def situation_normal(self):
+        self.path_pic_previous2 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main - 2]
+        self.path_pic_previous1 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main - 1]
+        self.path_pic_next1 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main + 1]
+        self.path_pic_next2 = self.path_of_pic_folder + '/' + self.names_all_pics[self.index_main + 2]
+        # 填充label53的边缘
+
+        self.pic_previous2 = self.fill(self.path_pic_previous2, self.ui.label_51.width() / self.ui.label_51.height())
+        self.ui.label_51.setPixmap(QPixmap(self.pic_previous2))
+        self.ui.label_56.setText(self.names_all_pics[self.index_main - 2])
+
+        self.pic_previous1 = self.fill(self.path_pic_previous1, self.ui.label_52.width() / self.ui.label_52.height())
+        self.ui.label_52.setPixmap(QPixmap(self.pic_previous1))
+        self.ui.label_57.setText(self.names_all_pics[self.index_main - 1])
+
+        self.pic_main = self.fill(self.path_pic_main, self.ui.label_53.width() / self.ui.label_53.height())
+        self.ui.label_53.setPixmap(QPixmap.fromImage(self.pic_main))
+        self.ui.label_58.setText(self.names_all_pics[self.index_main])
+
+        self.pic_next1 = self.fill(self.path_pic_next1, self.ui.label_54.width() / self.ui.label_54.height())
+        self.ui.label_54.setPixmap(QPixmap(self.pic_next1))
+        self.ui.label_59.setText(self.names_all_pics[self.index_main + 1])
+
+        self.pic_next2 = self.fill(self.path_pic_next2, self.ui.label_55.width() / self.ui.label_55.height())
+        self.ui.label_55.setPixmap(QPixmap(self.pic_next2))
+        self.ui.label_60.setText(self.names_all_pics[self.index_main + 2])
+
+    def fill(self, path, ratio):
+        # 边缘填充函数
+        pic = cv2.imread(path)
+        pic = cv2.cvtColor(pic, cv2.COLOR_BGR2RGB)
+        k1 = pic.shape[1] / pic.shape[0]  # 图片的长宽比
+        k2 = ratio  # label的长宽比
+        if k1 >= k2:
+            # 假如图片的长宽比大于等于label的长宽比，填充宽度
+            a = int(((pic.shape[0] * k1 / k2) - pic.shape[0]) / 2)  # 计算填充量并均分
+            pic_mian = cv2.copyMakeBorder(pic, a, a, 0, 0, cv2.BORDER_CONSTANT, value=[240, 240, 240])  # 填充颜色rgb[240, 240, 240]
+            image_height, image_width, image_depth = pic_mian.shape
+            saved_img_show = QImage(pic_mian.data, image_width, image_height, image_width * image_depth,
+                                    QImage.Format_RGB888)
+        else:
+            # 假如图片的长宽比小于label的长宽比，填充长度
+            b = int(((pic.shape[1] * k2 / k1) - pic.shape[1]) / 2)  # 计算填充量并均分
+            pic_mian = cv2.copyMakeBorder(pic, 0, 0, b, b, cv2.BORDER_CONSTANT, value=[240, 240, 240])
+            image_height, image_width, image_depth = pic_mian.shape
+            saved_img_show = QImage(pic_mian.data, image_width, image_height, image_width * image_depth,
+                                    QImage.Format_RGB888)
+        return saved_img_show
 
 
 if __name__ == "__main__":

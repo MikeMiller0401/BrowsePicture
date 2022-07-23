@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1175</width>
+    <width>1200</width>
     <height>700</height>
    </rect>
   </property>
@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="button_53">
    <property name="geometry">
     <rect>
-     <x>900</x>
-     <y>520</y>
+     <x>930</x>
+     <y>550</y>
      <width>151</width>
      <height>71</height>
     </rect>
@@ -38,14 +38,29 @@
   <widget class="QLabel" name="label_53">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>120</y>
-     <width>391</width>
-     <height>311</height>
+     <x>300</x>
+     <y>40</y>
+     <width>600</width>
+     <height>450</height>
     </rect>
    </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="lineWidth">
+    <number>1</number>
+   </property>
    <property name="text">
-    <string>main</string>
+    <string/>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -57,14 +72,17 @@
   <widget class="QLabel" name="label_55">
    <property name="geometry">
     <rect>
-     <x>1060</x>
-     <y>240</y>
-     <width>81</width>
-     <height>71</height>
+     <x>1100</x>
+     <y>430</y>
+     <width>80</width>
+     <height>60</height>
     </rect>
    </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
    <property name="text">
-    <string>next2</string>
+    <string/>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -76,14 +94,17 @@
   <widget class="QLabel" name="label_54">
    <property name="geometry">
     <rect>
-     <x>800</x>
-     <y>220</y>
-     <width>171</width>
-     <height>111</height>
+     <x>920</x>
+     <y>370</y>
+     <width>160</width>
+     <height>120</height>
     </rect>
    </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
    <property name="text">
-    <string>next1</string>
+    <string/>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -95,14 +116,17 @@
   <widget class="QLabel" name="label_52">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>220</y>
-     <width>161</width>
-     <height>121</height>
+     <x>120</x>
+     <y>370</y>
+     <width>160</width>
+     <height>120</height>
     </rect>
    </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
    <property name="text">
-    <string>previous1</string>
+    <string/>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -114,14 +138,17 @@
   <widget class="QLabel" name="label_51">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>250</y>
-     <width>91</width>
-     <height>61</height>
+     <x>20</x>
+     <y>430</y>
+     <width>80</width>
+     <height>60</height>
     </rect>
    </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
    <property name="text">
-    <string>previous2</string>
+    <string/>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -133,8 +160,8 @@
   <widget class="QPushButton" name="button_51">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>520</y>
+     <x>130</x>
+     <y>560</y>
      <width>131</width>
      <height>71</height>
     </rect>
@@ -146,10 +173,10 @@
   <widget class="QPushButton" name="button_52">
    <property name="geometry">
     <rect>
-     <x>470</x>
+     <x>500</x>
      <y>550</y>
-     <width>211</width>
-     <height>141</height>
+     <width>200</width>
+     <height>100</height>
     </rect>
    </property>
    <property name="text">
@@ -159,66 +186,81 @@
   <widget class="QLabel" name="label_56">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>360</y>
+     <x>20</x>
+     <y>510</y>
      <width>72</width>
      <height>15</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="label_57">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>370</y>
+     <x>170</x>
+     <y>510</y>
      <width>72</width>
      <height>15</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="label_58">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>460</y>
-     <width>72</width>
-     <height>15</height>
+     <x>560</x>
+     <y>500</y>
+     <width>81</width>
+     <height>31</height>
     </rect>
    </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string/>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QLabel" name="label_59">
    <property name="geometry">
     <rect>
-     <x>850</x>
-     <y>360</y>
+     <x>960</x>
+     <y>510</y>
      <width>72</width>
      <height>15</height>
     </rect>
    </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="label_60">
    <property name="geometry">
     <rect>
-     <x>1060</x>
-     <y>330</y>
+     <x>1100</x>
+     <y>510</y>
      <width>72</width>
      <height>15</height>
     </rect>
    </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string/>
    </property>
   </widget>
  </widget>
